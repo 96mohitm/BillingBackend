@@ -1,3 +1,5 @@
 billing
 __pycache__
 *.db
+.DS_Store
+src/.DS_Store

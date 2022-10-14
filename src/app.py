@@ -3,6 +3,7 @@ from flask_restful import Resource, Api
 from flask_sqlalchemy import SQLAlchemy
 
 from manager.inventory_manager import InventoryListManager, InventoryManager
+from manager.product_manager import ProductListManager, ProductManager
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///billing.db'
@@ -19,6 +20,8 @@ def create_tables():
 
 api.add_resource(InventoryManager, '/')
 api.add_resource(InventoryListManager, '/inventory_list')
+api.add_resource(ProductManager, '/product')
+api.add_resource(ProductListManager, '/product_list')
 
 
 if __name__ == '__main__':

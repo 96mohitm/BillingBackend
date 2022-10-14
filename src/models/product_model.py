@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 from db import db
 
 
@@ -6,8 +6,8 @@ class ProductModel(db.Model):
     __tablename__ = 'product'
 
     id = db.Column(db.Integer, primary_key=True)
-    created_ts = db.Column(db.DateTime,nullable=False, default=datetime.utcnow)
-    updated_ts = db.Column(db.Datetime,nullable=False, default=datetime.utcnow)
+    created_ts = db.Column(db.DateTime,nullable=False, default=datetime.utcnow())
+    updated_ts = db.Column(db.DateTime,nullable=False, default=datetime.utcnow())
     name = db.Column(db.String(140),nullable=False)
     description = db.Column(db.String(1000),nullable=True)
 
@@ -25,8 +25,18 @@ class ProductModel(db.Model):
         }
 
     def __repr__(self):
-        pass
+        return '<id {}>'.format(self.id)
+
 
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()
+
+
+    @classmethod
+    def find_by_name(cls, name):
+        return cls.query.filter_by(name=name).first()
+
+    @classmethod
+    def find_by_id(cls, id):
+        return cls.query.filter_by(id=id).first()

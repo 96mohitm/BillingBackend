@@ -1,18 +1,21 @@
-from flask_restful import Resource
+from flask_restful import Resource, reqparse
 
 from models.product_model import ProductModel
 
 
 class ProductManager(Resource):
+    
+    parser = reqparse.RequestParser()
+    parser.add_argument('name')
+    parser.add_argument('description')
 
-    def get(self, id):
-        return ProductModel.find_by_id(id)
-
-
-    def post(self, name, description):
-        if ProductModel.find_by_name(name):
+    def post(self):
+        data = ProductManager.parser.parse_args()
+        if ProductModel.find_by_name(data['name']):
+            name = data['name']
             return {'message': "An product with name '{}' already exists.".format(name)}, 400
-        product = ProductModel(name, description)
+        
+        product = ProductModel(**data)
 
         try:
             product.save_to_db()
@@ -21,3 +24,8 @@ class ProductManager(Resource):
 
 
         return product.json(), 201
+
+class ProductListManager(Resource):
+
+    def get(self):
+        return {'products': list(map(lambda x: x.json(), ProductModel.query.all()))}
