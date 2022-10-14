@@ -1,5 +1,6 @@
 # Billing Software
 ## Functional Requirements:
+
 Add inventory
 Add sales history
 Show ledger
@@ -10,20 +11,28 @@ Non-functional Requirement:
 -
 
 ## SQL tables:
+
 Inventory Table:
 id, product, quantity, group_id(eg medsbull), …
+
 invoice table.(stores list of sales)
 id, group_id, customer_id, ,...
+
 sales_product_quantity
+
 Customer table
+
 Product_detail
 product_id, name, other details.
+
 ledger table - will be updated when we are changing anything in inventory.
-Reminder table.
+
+reminder_table.
 
 
 ## APIs:
 ### INVENTORY
+
 get_inventory - GET
 add_inventory - POST
 search_product - {keyword} return a list of products.
@@ -31,11 +40,13 @@ add_product - POST
 get_product_list - GET
 
 ### SALES
+
 get_sales - GET
 add_sales - POST return a invoice_id
 get_invoice - {invoice_id} return a website which is the bill, or we can direct print it in backend and then save the pdf in s3 and return the url of saved bill. or we can generator pdfs using libraries.
 
 ### Show ledger
+
 get_ledger - GET
 Show Product Details
 get_product_details
