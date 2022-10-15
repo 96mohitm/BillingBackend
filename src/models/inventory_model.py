@@ -1,3 +1,4 @@
+from sqlalchemy import ForeignKey
 from db import db
 from datetime import datetime
 
@@ -5,18 +6,23 @@ class InventoryModel(db.Model):
     __tablename__ = 'inventory'
 
     id = db.Column(db.Integer, primary_key=True)
-    created_dt = db.Column(db.DateTime,nullable=False, default=datetime.utcnow)
-    quantity = db.Column(db.Integer)
-    # price = db.Column(db.Float)
+    product_id = db.Column(db.Integer, ForeignKey('product.id'), nullable=False)
+    created_dt = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    quantity = db.Column(db.Integer, nullable=False)
+    price_per_quantity = db.Column(db.Float, nullable=False)
 
-    def __init__(self, quantity):
+    def __init__(self, product_id, quantity, price_per_quantity):
+        self.product_id=product_id
         self.quantity = quantity
+        self.price_per_quantity = price_per_quantity
 
     def json(self):
         return {
             'id': self.id,
+            'product_id': self.product_id,
             'created_dt': self.created_dt.strftime('%Y/%m/%d'),
-            'quantity': self.quantity
+            'quantity': self.quantity,
+            'price_per_quantity': self.quantity
         }
 
     def __repr__(self):

@@ -1,22 +1,24 @@
 # Billing Software
 ## Functional Requirements:
 
-Add inventory
-Add sales history
-Show ledger
-Show Product Details
-Reminder of Products to the customer via whatsapp/sms
-A website link to share with the user to see the list and invoice for a purchase.
-Non-functional Requirement:
+1. Add inventory
+1. Add sales history
+1. Show ledger
+1. Show Product Details
+1. Reminder of Products to the customer via whatsapp/sms
+1. A website link to share with the user to see the list and invoice for a purchase.
+
+## Non-functional Requirement:
 -
 
 ## SQL tables:
 
-Inventory Table:
-id, product, quantity, group_id(eg medsbull), …
+- Inventory Table:
+  id, product, quantity, group_id(eg medsbull), …
 
-invoice table.(stores list of sales)
-id, group_id, customer_id, ,...
+- invoice table.(stores list of sales)
+
+  id, group_id, customer_id, ,...
 
 sales_product_quantity
 
