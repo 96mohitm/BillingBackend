@@ -1,3 +1,4 @@
+from flask import request
 from flask_restful import Resource, reqparse
 
 from models.product_model import ProductModel
@@ -24,6 +25,13 @@ class ProductManager(Resource):
 
 
         return product.json(), 201
+
+    def get(self):
+        args = request.args
+        try:
+            return ProductModel.find_by_id(int(args['product_id'])).json()
+        except:
+            return {"message": "Product was not found."}, 500
 
 class ProductListManager(Resource):
 

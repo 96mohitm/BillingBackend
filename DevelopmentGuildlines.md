@@ -1,7 +1,7 @@
 
 Create a new python virtual enviornment.
 1. `pip3 install virtualenv`
-1. `python<version> -m venv <virtual-environment-name>`
+1. `python<version> -m venv billing`
     name: billing
 1. source billing/bin/activate
 1. install dependencies:
