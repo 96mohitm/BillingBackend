@@ -9,6 +9,7 @@ class InventoryManager(Resource):
         inventory_json = request.get_json()
         inventory = InventoryModel(
             product_id=inventory_json.get('product_id'),
+            batch_id=inventory_json.get('batch_id'),
             quantity=inventory_json.get('quantity'),
             price_per_quantity=inventory_json.get('price_per_quantity'))
         try:
@@ -22,4 +23,4 @@ class InventoryManager(Resource):
 class InventoryListManager(Resource):
 
     def get(self):
-        return {'posts': list(map(lambda x: x.json(), InventoryModel.query.all()))}
+        return {'inventory': list(map(lambda x: x.json(), InventoryModel.query.all()))}
